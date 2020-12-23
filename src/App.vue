@@ -1,19 +1,54 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <todo-header></todo-header>
+    <todo-form></todo-form>
+    <todo-filter></todo-filter>
+    <todo-list></todo-list>
+    <todo-bottom></todo-bottom>
+    <!-- <p>{{ activeTodosCount }} task(s) left</p> -->
   </div>
 </template>
+<script>
+import TodoFilter from "./components/TodoFilter.vue";
+import TodoForm from "./components/TodoForm.vue";
+import TodoHeader from "./components/TodoHeader";
+import TodoList from "./components/TodoList";
+import TodoBottom from "./components/TodoBottom";
 
+export default {
+  name: "app",
+  components: {
+    TodoHeader,
+    TodoFilter,
+    TodoForm,
+    TodoList,
+    TodoBottom,
+  },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    },
+    doneTodosCount() {
+      return this.$store.getters.doneTodos.length;
+    },
+    activeTodosCount() {
+      return this.$store.getters.activeTodos.length;
+    },
+  },
+  methods: {},
+};
+</script>
 <style>
+* {
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
   color: #2c3e50;
 }
 
